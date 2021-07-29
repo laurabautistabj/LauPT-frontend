@@ -1,0 +1,69 @@
+<mat-toolbar class="semi-black">
+  <div class="d-flex justify-content-between align-items-center w-100">
+    <div class="d-flex align-items-center" routerLink="">
+      <img src="/assets/logo.png" class="img-logo" />
+    </div>
+
+    <div class="d-flex align-items-center justify-content-end">
+      <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+        <mat-icon class="mx-2 color-blue"
+                  [matBadge]="notificationsData.unread"
+                  [matBadgeHidden]="notificationsData.unread === 0"
+                  matBadgeColor="warn">notifications
+        </mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="messagesMenu">
+        <mat-icon class="mx-2 color-blue" matBadge="1" matBadgeColor="warn">chat_bubble_outline</mat-icon>
+      </button>
+
+      <div *ngIf="currentUser" matRipple class="user-info ml-3" [matMenuTriggerFor]="userMenu">
+        <img [src]="currentUser.photoURL ? currentUser.photoURL : (currentUser.email | gravatar)" [alt]="currentUser.displayName" class="profile-picture">
+        <span class="mx-2 user-name color-blue" *ngIf="!(isMobile$ | async)">{{currentUser.displayName}}</span>
+        <mat-icon class="color-blue">expand_more</mat-icon>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+<div class="toolbar-container bg-light-black">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item routerLink="profile">Mi perfil</button>
+  <button mat-menu-item routerLink="edit-profile">Editar perfil</button>
+  <button mat-menu-item routerLink="configuration">Configuración</button>
+  <button mat-menu-item (click)="onLogout()">Salir</button>
+</mat-menu>
+
+<mat-menu #notificationsMenu="matMenu">
+  <mat-action-list>
+    <button mat-list-item
+            (click)="onViewNotification(notification)"
+            *ngFor="let notification of notificationsData.notifications">
+      <img matListAvatar [src]="notification.id | gravatar" [alt]="notification.title">
+      <h3 matLine> {{notification.title}} </h3>
+      <p matLine>
+        <span> {{notification.description}} </span>
+      </p>
+    </button>
+  </mat-action-list>
+</mat-menu>
+
+<mat-menu #messagesMenu="matMenu">
+  <mat-action-list>
+    <button mat-list-item
+            (click)="onOpenChat(course)"
+            *ngFor="let course of courses">
+      <img matListAvatar [src]="course.id | gravatar" [alt]="course.Nombre">
+      <h3 matLine> {{course.Nombre}} </h3>
+      <p matLine>
+        <span *ngIf="course.lastMessages && course.lastMessages.length > 0">
+          ({{course.lastMessages[0].createdBy.name}})
+          {{course.lastMessages[0].message}}
+        </span>
+      </p>
+    </button>
+  </mat-action-list>
+</mat-menu>

@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div class="d-flex align-items-center">
+    <button mat-icon-button routerLink="..">
+      <mat-icon class="color-blue">arrow_back</mat-icon>
+    </button>
+    <h4 class="m-0 color-blue"><strong>Temas</strong></h4>
+  </div>
+  <button mat-raised-button color="primary" (click)="onCreate()">Crear</button>
+</div>
+
+<table mat-table [dataSource]="data" class="example-table w-100"
+       matSort matSortActive="Indice" matSortDisableClear matSortDirection="asc">
+  <!-- Number Column -->
+  <ng-container matColumnDef="Nombre">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Nombre</th>
+    <td mat-cell *matCellDef="let row">{{row.Nombre}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="Descripcion">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Descripción</th>
+    <td mat-cell *matCellDef="let row">{{row.Descripcion}}</td>
+  </ng-container>
+
+  <!-- Title Column -->
+  <ng-container matColumnDef="Indice">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Número</th>
+    <td mat-cell *matCellDef="let row">{{row.Indice}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="PreguntasPorCuestionario">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Preguntas por<br>cuestionario</th>
+    <td mat-cell *matCellDef="let row">{{row.PreguntasPorCuestionario}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="TiempoVolverIntentar">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Tiempo para<br>reintentar</th>
+    <td mat-cell *matCellDef="let row">{{(row.TiempoVolverIntentar/3600) < 1 ? row.TiempoVolverIntentar/60 + ' min' : row.TiempoVolverIntentar/3600 + ' hrs'}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="resources">
+    <th mat-header-cell *matHeaderCellDef disableClear>Recursos</th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button (click)="openResources(row)">
+        <mat-icon>description</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="content">
+    <th mat-header-cell *matHeaderCellDef disableClear>Cuestionario</th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button routerLink="{{row.id}}">
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef disableClear></th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button (click)="onEdit(row)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

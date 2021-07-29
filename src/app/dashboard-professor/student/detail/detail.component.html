@@ -1,0 +1,85 @@
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon matRipple (click)="onClose()">arrow_back</mat-icon>
+        {{data.Nombre}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Información del Alumno
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-card class="mat-elevation-z0">
+      <mat-card-header>
+        <img mat-card-avatar [src]="data?.Foto || (data?.Correo | gravatar)">
+        <mat-card-title>
+          Perfil de {{data?.Nombre}} {{data?.ApPaterno}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Estilo de aprendizaje: <b>{{data?.EstiloAprendizaje}}</b>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p><b>Nombres: </b> {{data.Nombre}}</p>
+        <p><b>Apellido Paterno: </b>{{data.ApPaterno}} </p>
+        <p><b>Apellido Materno: </b>{{data.ApMaterno}} </p>
+        <p><b>Correo: </b> {{data?.Correo}}</p>
+        <p><b>Dirección: </b> {{data.Direccion}}</p>
+        <p><b>Teléfono: </b> {{data.Telefono}}</p>
+        <p><b>Género: </b> {{data.Sexo === 'male' ? 'Hombre' : 'Mujer'}}</p>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-card class="mt-3">
+  <mat-card-content class="w-100 overflow-auto">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Unidad</th>
+        <th>Tema</th>
+        <th>Nº Intento</th>
+        <th>Correctas</th>
+        <th>Incorrectas</th>
+        <th>Omitidas</th>
+        <th>Finalizado</th>
+        <th>Iniciado</th>
+        <th>Actualizado</th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let unit of data.Unidades">
+        <tr>
+          <td colspan="9">{{unit.Nombre}}</td>
+        </tr>
+
+        <ng-container *ngFor="let subject of unit.Temas">
+          <tr>
+            <td></td>
+            <td colspan="8">{{subject.Nombre}}</td>
+          </tr>
+
+          <ng-container *ngFor="let questionnaire of (subject.Cuestionarios.reverse())">
+            <tr>
+              <td></td>
+              <td></td>
+              <td>{{questionnaire.NumIntentos}}</td>
+              <td>{{questionnaire.Correctas}}</td>
+              <td>{{questionnaire.Incorrectas}}</td>
+              <td>{{questionnaire.Omitidas}}</td>
+              <td>{{questionnaire.Finalizado ? 'Sí' : 'No'}}</td>
+              <td>{{questionnaire.Creado | date}}<br>{{questionnaire.Creado | date:'HH:mm:ss'}}</td>
+              <td>{{questionnaire.Actualizado | date}}<br>{{questionnaire.Actualizado | date:'HH:mm:ss'}}</td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+

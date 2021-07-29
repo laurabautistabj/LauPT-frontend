@@ -1,0 +1,122 @@
+<div class="h-100 bg-img">
+<div class="h-100 bg-overlay">
+<div class="h-100 overflow-auto d-flex py-3">
+  <div class="container my-auto">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 col-lg-5">
+        <mat-card class="principal-box">
+          <mat-card-header>
+            <mat-card-title class="title-card">Crear Cuenta</mat-card-title>
+          </mat-card-header>
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+            <mat-card-content class="mb-0">
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Nombre</mat-label>
+                <input matInput formControlName="firstName" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('firstName')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Apellido Paterno</mat-label>
+                <input matInput type="text" formControlName="lastName" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('lastName')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Apellido Materno</mat-label>
+                <input matInput type="text" formControlName="motherLastName"
+                       placeholder="Tu Apellido Materno (Opcional)" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('motherLastName')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Fecha de nacimiento</mat-label>
+                <input matInput type="date" formControlName="dateOfBirth" class="input-label" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('dateOfBirth')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Email</mat-label>
+                <input matInput type="email" formControlName="email" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('email')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Teléfono</mat-label>
+                <input matInput type="tel" formControlName="phone"
+                       [imask]="{mask: '(00) 0000 0000'}" [unmask]="true" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('phone')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Dirección</mat-label>
+                <input matInput type="text" formControlName="address" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('address')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+
+              <label id="gender-radio-group-label" class="input-label">Género</label>
+              <mat-radio-group
+                class="d-flex mb-3 input-label"
+                aria-labelledby="gender-radio-group-label"
+                formControlName="gender">
+                <mat-radio-button value="male" class="mx-2 input-label">
+                  Masculino
+                </mat-radio-button>
+                <mat-radio-button value="female" class="mx-2 input-label">
+                  Femenino
+                </mat-radio-button>
+              </mat-radio-group>
+
+              <label class="input-label">Foto</label>
+              <div class="col-12 image-selector-container">
+                <input type="file" hidden #imagePickerRef (change)="imageSelected($event)">
+                <div class="image-viewer" matRipple (click)="imagePickerRef.click()">
+                  <div class="image-picker" *ngIf="!imagePreview">
+                    <mat-icon>add</mat-icon>
+                    <span>Añadir imagen</span>
+                  </div>
+                  <img [src]="imagePreview" alt="Imagen" *ngIf="imagePreview" class="h-100">
+                </div>
+              </div>
+
+              <mat-form-field appearance="outline" color="primary" class="w-100 mt-3">
+                <mat-label class="input-label">Password</mat-label>
+                <input matInput type="password" formControlName="password" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('password')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="input-label">Confirmar password</mat-label>
+                <input matInput type="password" formControlName="password_confirmation" class="text-input">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="registerForm.get('password_confirmation')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+
+            </mat-card-content>
+            <mat-card-actions class="mb-0">
+              <div class="container-fluid d-flex justify-content-center align-items-center">
+                <button mat-raised-button color="primary" [disabled]="!registerForm.valid">Registrarme</button>
+              </div>
+            </mat-card-actions>
+          </form>
+
+          <div class="d-flex flex-column align-items-start justify-content-center">
+            <button mat-button routerLink="/auth" class="input-label"><< Regresar</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>

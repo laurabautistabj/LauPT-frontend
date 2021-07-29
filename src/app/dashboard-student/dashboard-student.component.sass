@@ -1,0 +1,41 @@
+.user-info
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  cursor: pointer
+
+  .user-name
+    max-width: 9rem
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .profile-picture
+    border-radius: 50%
+    height: 3rem
+    width: 3rem
+    object-fit: cover
+
+.mat-sidenav
+  width: 15rem
+
+.toolbar-container
+  height: calc(100% - 64px)
+  overflow: auto
+
+@media (max-width: 599px)
+  .toolbar-container
+    height: calc(100% - 56px)
+
+.semi-black ::ng-deep
+  background-color: #191919
+
+.img-logo
+  width: 85px
+  height: auto
+  cursor: pointer
+
+.color-blue ::ng-deep
+  color:#51b9d2
+
+.bg-light-black
+  background-color: #323232

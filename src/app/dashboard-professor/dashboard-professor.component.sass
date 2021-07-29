@@ -1,0 +1,42 @@
+.user-info
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  cursor: pointer
+
+  .user-name
+    max-width: 9rem
+    overflow: hidden
+    text-overflow: ellipsis
+
+  .profile-picture
+    border-radius: 50%
+    height: 3rem
+    width: 3rem
+    object-fit: cover
+
+.mat-sidenav
+  width: 15rem
+
+  .mat-action-list
+    .mat-list-item
+      &.active
+        background-color: rgb(243, 243, 243)
+        color: rgb(0, 158, 251)
+
+.center ::ng-deep
+  justify-content: center
+
+.semi-black ::ng-deep
+  background-color: #191919
+
+.img-logo
+  width: 85px
+  height: auto
+  cursor: pointer
+
+.color-blue ::ng-deep
+  color:#51b9d2
+
+.bg-light-black ::ng-deep
+  background-color: #323232

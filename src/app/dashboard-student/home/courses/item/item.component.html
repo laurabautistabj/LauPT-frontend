@@ -1,0 +1,71 @@
+<h3 class="text-center" style="color: white">¿Qué quieres aprender hoy?</h3>
+<div class="container-fluid mb-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <input type="text" class="custom-search-input" placeholder="Buscar..." [formControl]="searchCtrl">
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="courseData">
+
+  <ng-container *ngFor="let unit of courseData.Unidades;">
+    <div class="unit-container" *ngIf="unit.Temas.length > 0">
+      <div class="unit-content">
+        <p class="unit-name">{{unit.Nombre}}</p>
+        <drag-scroll [snap-disabled]="true">
+          <div drag-scroll-item class="scroll-item"
+               matTooltip="Completa el tema anterior para debloquear el cuestionario"
+               matTooltipPosition="above"
+               [matTooltipDisabled]="subject.Activo"
+               *ngFor="let subject of unit.Temas;" style="vertical-align: middle;">
+            <div class="subject-container">
+              <div class="subject-content">
+                <div class="w-100 h-100 d-flex flex-column justify-content-end align-items-start">
+                  <ng-container *ngIf="subject.Activo">
+                    <ng-container *ngIf="subject.Aprobado">
+                      <div class="mb-2">
+                        <button mat-mini-fab (click)="openQuestionnaire(subject)">
+                          <mat-icon style="color: white">play_arrow</mat-icon>
+                        </button>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="!subject.Aprobado">
+                      <ng-container *ngIf="subject.PuedeIntentar">
+                        <div class="mb-2">
+                          <button mat-mini-fab (click)="openQuestionnaire(subject)">
+                            <mat-icon style="color: white">play_arrow</mat-icon>
+                          </button>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="!subject.PuedeIntentar">
+                        <ng-container *ngIf="subject.AlumnoCursa.length > 0">
+                          <app-count-down [inNSeconds]="subject.TiempoVolverIntentar"
+                                          matTooltip="Tiempo restante para volver a intentar (Días - hh:mm:ss)"
+                                          matTooltipPosition="above"
+                                          (countdownFinish)="subject.PuedeIntentar = true"
+                                          [dateNowString]="subject.AlumnoCursa[0].FechaFinalizado ? subject.AlumnoCursa[0].FechaFinalizado : '2000-01-01T01:01:01Z'"></app-count-down>
+                        </ng-container>
+                        <ng-container *ngIf="subject.AlumnoCursa.length === 0">
+                          <app-count-down [inNSeconds]="1" (countdownFinish)="subject.PuedeIntentar = true"></app-count-down>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
+
+                  </ng-container>
+
+                  <div class="d-flex flex-column text-container">
+                  <span class="subject-name"
+                        matTooltipPosition="above"
+                        [matTooltip]="subject.Nombre">{{subject.Nombre}}</span>
+                    <span class="course-name">{{courseData.Nombre}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </drag-scroll>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

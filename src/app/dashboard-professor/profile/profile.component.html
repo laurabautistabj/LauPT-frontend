@@ -1,0 +1,35 @@
+<div class="my-3">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <mat-card class="bg-black">
+          <mat-card-header>
+            <img mat-card-avatar [src]="currentUser?.photoURL || (currentUser?.email | gravatar)">
+            <mat-card-title class="color-blue">
+              Perfil de {{currentUser?.displayName}}
+            </mat-card-title>
+            <mat-card-subtitle>
+
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content *ngIf="professorData | async as professorObj">
+            <p class="color-blue"><b>Nombres: </b> {{professorObj.Nombre}}</p>
+            <p class="color-blue"><b>Apellido Paterno: </b>{{professorObj.ApPaterno}} </p>
+            <p class="color-blue"><b>Apellido Materno: </b>{{professorObj.ApMaterno}} </p>
+            <p class="color-blue"><b>Correo: </b> {{currentUser?.email}}</p>
+            <p class="color-blue"><b>Dirección: </b> {{professorObj.Direccion}}</p>
+            <p class="color-blue"><b>Teléfono: </b> {{professorObj.Telefono}}</p>
+            <p class="color-blue"><b>Género: </b> {{professorObj.Sexo === 'male' ? 'Hombre' : 'Mujer'}}</p>
+
+            <div class="row">
+              <div class="col-12 d-flex justify-content-end">
+                <button mat-raised-button color="primary" routerLink="/professor/edit-profile">Editar</button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="container h-100 w-100 d-flex align-items-center justify-content-center">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <mat-card>
+          <h3>Antes de continuar, por favor verifica tu correo electrónico</h3>
+          <h4>Se ha enviado un email a tu correo electrónico con los pasos a seguir</h4>
+          <p *ngIf="showResend">
+            ¿No has recibido el correo? <button mat-button (click)="sendEmailVerification()">Reenviar correo</button>
+          </p>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

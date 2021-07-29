@@ -1,0 +1,35 @@
+<div class="my-3">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <mat-card class="bg-black">
+          <mat-card-header>
+            <img mat-card-avatar [src]="currentUser?.photoURL || (currentUser?.email | gravatar)">
+            <mat-card-title class="color-blue">
+              Perfil de {{currentUser?.displayName}}
+            </mat-card-title>
+            <mat-card-subtitle class="color-blue" *ngIf="learningStyle | async as learningStyleData">
+              Estilo de aprendizaje: <b>{{learningStyleData.Nombre}}</b>
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content class="color-blue" *ngIf="studentData | async as studentDataObj">
+            <p><b>Nombres: </b> {{studentDataObj.Nombre}}</p>
+            <p><b>Apellido Paterno: </b>{{studentDataObj.ApPaterno}} </p>
+            <p><b>Apellido Materno: </b>{{studentDataObj.ApMaterno}} </p>
+            <p><b>Correo: </b> {{currentUser?.email}}</p>
+            <p><b>Dirección: </b> {{studentDataObj.Direccion}}</p>
+            <p><b>Teléfono: </b> {{studentDataObj.Telefono}}</p>
+            <p><b>Género: </b> {{studentDataObj.Sexo === 'male' ? 'Hombre' : 'Mujer'}}</p>
+
+            <div class="row">
+              <div class="col-12 d-flex justify-content-end">
+                <button mat-raised-button color="primary" routerLink="/student/edit-profile">Editar</button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

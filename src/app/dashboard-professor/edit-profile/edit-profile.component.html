@@ -1,0 +1,103 @@
+<div class="my-3">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6">
+        <mat-card class="bg-black">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+            <mat-card-header>
+              <mat-card-title class="color-blue">
+                Perfil de {{currentUser?.displayName}}
+              </mat-card-title>
+              <mat-card-subtitle>
+
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+
+              <div class="col-12 d-flex justify-content-center">
+                <div class="user-profile-image edit-profile-image"
+                     (click)="editProfileRef.click()"
+                     matRipple
+                     [matRippleUnbounded]="false"
+                     [matRippleCentered]="true">
+                  <img [src]="profileForm.get('photoURL').value">
+                  <mat-icon color="primary">camera_alt</mat-icon>
+                  <input type="file" hidden #editProfileRef
+                         accept="image/x-png,image/gif,image/jpeg"
+                         (change)="onSelectProfile($event)">
+                </div>
+              </div>
+
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="color-blue">Nombre</mat-label>
+                <input matInput formControlName="firstName"  class="color-blue">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="profileForm.get('firstName')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="color-blue">Apellido Paterno</mat-label>
+                <input class="color-blue" matInput type="text" formControlName="lastName">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="profileForm.get('lastName')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="color-blue">Apellido Materno</mat-label>
+                <input matInput type="text" formControlName="motherLastName"
+                       placeholder="Tu Apellido Materno (Opcional)" class="color-blue">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="profileForm.get('motherLastName')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="color-blue">Email</mat-label>
+                <input matInput type="email" formControlName="email" class="color-blue">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="profileForm.get('email')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="color-blue">Teléfono</mat-label>
+                <input matInput type="tel" formControlName="phone"
+                       [imask]="{mask: '(00) 0000 0000'}" [unmask]="true" class="color-blue">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="profileForm.get('phone')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="color-blue">Dirección</mat-label>
+                <input matInput type="text" formControlName="address" class="color-blue">
+                <mat-error>
+                  <app-field-error [fieldCtrl]="profileForm.get('address')"></app-field-error>
+                </mat-error>
+              </mat-form-field>
+
+              <label id="gender-radio-group-label" class="color-blue">Género</label>
+              <mat-radio-group
+                class="d-flex mb-3"
+                aria-labelledby="gender-radio-group-label"
+                formControlName="gender">
+                <mat-radio-button value="male" class="mx-2 color-blue">
+                  Masculino
+                </mat-radio-button>
+                <mat-radio-button value="female" class="mx-2 color-blue">
+                  Femenino
+                </mat-radio-button>
+              </mat-radio-group>
+
+              <div class="row">
+                <div class="col-12 d-flex justify-content-between">
+                  <button mat-button routerLink="/professor/profile" type="button" class="color-blue"><< Regresar</button>
+                  <button mat-raised-button color="primary" [disabled]="!profileForm.valid">Guardar Cambios</button>
+                </div>
+              </div>
+            </mat-card-content>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<p class="color-blue">{{data?.Nombre}}</p>
+
+<div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center">
+    <button mat-icon-button routerLink="..">
+      <mat-icon class="color-blue">arrow_back</mat-icon>
+    </button>
+    <h4 class="m-0 color-blue"><strong>
+      Cuestionario
+    </strong></h4>
+  </div>
+  <button mat-raised-button (click)="onNewQuestion()">Nueva pregunta</button>
+</div>
+
+<div *ngFor="let question of questionnaire" class="mb-5">
+  <mat-card>
+    <mat-card-header>
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <h5>{{question.Pregunta}} <small>({{question.Nivel}})</small></h5>
+
+        <div>
+          <button mat-icon-button color="warn" (click)="onDeleteQuestion(question)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" (click)="onNewQuestion(question)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="d-flex justify-content-center align-items-center" *ngIf="question.Imagen">
+        <img [src]="question.Imagen" [alt]="question.Pregunta" class="img-fluid" style="width: min(350px, 100%);">
+      </div>
+      <mat-selection-list>
+        <mat-list-option [disabled]="true" *ngFor="let answer of question.Respuestas" [selected]="!!answer.Correcta">
+          {{answer.Respuesta}}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,27 @@
+<mat-sidenav-container class="h-100">
+  <mat-sidenav position="start" [mode]="(isMobile$ | async) ? 'over' : 'side'" #matSidenav [opened]="!(isMobile$ | async)">
+    <mat-toolbar color="primary">
+      App Name
+    </mat-toolbar>
+    <mat-action-list>
+      <mat-list-item routerLink="/admin" (click)="isMobile && matSidenav.toggle()">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span mat-line>Inicio</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item (click)="onLogout()">
+        <mat-icon mat-list-icon>logout</mat-icon>
+        <span mat-line>Cerrar sesión</span>
+      </mat-list-item>
+    </mat-action-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button mat-icon-button *ngIf="isMobile$ | async" (click)="matSidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      App name
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

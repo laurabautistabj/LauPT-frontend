@@ -1,0 +1,30 @@
+<h1 mat-dialog-title class="text-center">{{data.Nombre}}</h1>
+<div mat-dialog-content>
+
+  <div class="" *ngIf="currentQuestion">
+    <app-questionnaire-question
+      (answer)="onAnswerEmitted(currentQuestion.Id, $event)"
+      (cancel)="onCancel()"
+      [question]="currentQuestion"></app-questionnaire-question>
+  </div>
+
+  <button *ngIf="!currentQuestion" mat-raised-button [mat-dialog-close]="true">
+    Cerrar
+  </button>
+
+</div>
+
+
+<div class="w-100 position-fixed" style="bottom: 1rem; left: 0; right: 0;" *ngIf="showPreviousResult && currentQuestion.Resultado">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-6 mat-elevation-z4 previous-result">
+        Tu respuesta anterior
+        <span *ngIf="currentQuestion.Resultado.Correcta === 1"> fue correcta</span>
+        <span *ngIf="currentQuestion.Resultado.Incorrecta === 1"> fue incorrecta</span>
+        <span *ngIf="currentQuestion.Resultado.Omitida === 1"> fue omitida</span>
+        <span *ngIf="currentQuestion.Resultado.Correcta < 1 && currentQuestion.Resultado.Correcta > 0"> tuvo un resultado parcial de {{currentQuestion.Resultado.Correcta | number}}</span>
+      </div>
+    </div>
+  </div>
+</div>

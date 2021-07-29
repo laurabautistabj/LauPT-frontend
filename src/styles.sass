@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+.header-container
+  height: calc(100% - 64px)
+
+@media (max-width: 599px)
+  .header-container
+    height: calc(100% - 56px)
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.drag-scroll-content::-webkit-scrollbar
+  display: none
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.drag-scroll-content
+  -ms-overflow-style: none
+  /* IE and Edge */
+  scrollbar-width: none
+/* Firefox */
+
+
+@media (max-width: 599px)
+  .responsive-full-screen-dialog
+    max-width: 100% !important
+    width: 100%
+    height: calc(100% - 56px)
+    position: fixed !important
+    bottom: 0
+    border-radius: 0
+
+
+.custom-search-input
+  color: white
+  width: 100%
+  background-color: transparent
+  border: 2px solid white
+  border-radius: 1rem
+  padding-left: 1rem
+  padding-right: 1rem
+  outline: none

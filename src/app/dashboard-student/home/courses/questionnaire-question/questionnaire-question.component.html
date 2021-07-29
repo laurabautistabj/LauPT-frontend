@@ -1,0 +1,33 @@
+<h3 class="text-center">{{question.Pregunta}}</h3>
+<div class="d-flex justify-content-center align-items-center" *ngIf="question.Imagen">
+  <img [src]="question.Imagen" [alt]="question.Pregunta" class="img-fluid" style="width: min(350px, 100%);">
+</div>
+<div>
+  <ng-container *ngIf="!question.Multiple">
+    <mat-radio-group class="d-flex flex-column" [formControl]="answerControl">
+      <mat-radio-button *ngFor="let answer of question.Respuestas" [value]="answer.Id">
+        {{answer.Respuesta}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </ng-container>
+
+  <ng-container *ngIf="question.Multiple">
+    <mat-selection-list (selectionChange)="onMultipleSelectionChange($event)">
+      <mat-list-option [value]="answer.Id" *ngFor="let answer of question.Respuestas">
+        {{answer.Respuesta}}
+      </mat-list-option>
+    </mat-selection-list>
+  </ng-container>
+
+  <div class="w-100 d-flex justify-content-around">
+    <button mat-button color="warn" (click)="onCancel()" class="mx-3">
+      Cancelar
+    </button>
+    <button mat-raised-button color="accent" (click)="onSubmitVoidAnswer()" class="mx-3">
+      Saltar pregunta
+    </button>
+    <button mat-raised-button color="primary" [disabled]="!answerControl.valid" (click)="onSubmitAnswer()" class="mx-3">
+      Enviar respuesta
+    </button>
+  </div>
+</div>

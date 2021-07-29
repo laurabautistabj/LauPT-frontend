@@ -1,0 +1,42 @@
+<ng-container *ngIf="fieldCtrl?.errors?.required">
+  Campo Requerido
+</ng-container>
+<ng-container *ngIf="!fieldCtrl?.errors?.required">
+  <ng-container *ngIf="fieldCtrl?.errors?.email">
+    Campo Correo Electrónico
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.noNumber">
+    Sólo letras
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.minlength">
+    Longitud Mínima {{fieldCtrl?.errors?.minlength?.requiredLength | number}}
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.maxlength">
+    Longitud Máxima {{fieldCtrl?.errors?.maxlength?.requiredLength | number}}
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.cardNumber">
+    Número de tarjeta no válido
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.expiry">
+    Fecha de expiración no válida
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.cvc">
+    Código de seguridad no válido
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.confirmation">
+    No coincide el valor
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.password">
+    {{fieldCtrl.errors.password.message}}
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.pattern">
+    Campo Correo Electrónico
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.store">
+    Agencia no válida
+  </ng-container>
+  <ng-container *ngIf="fieldCtrl?.errors?.duplicated">
+    {{fieldCtrl?.errors?.duplicated?.message}}
+  </ng-container>
+</ng-container>
+

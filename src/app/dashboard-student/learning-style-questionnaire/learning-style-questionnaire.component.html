@@ -1,0 +1,36 @@
+<div class="py-3">
+  <form [formGroup]="itemFormGroup" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>Antes de continuar, por favor completa el cuestionario de estilos de aprendizaje</h3>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="container-fluid">
+          <div *ngFor="let questionForm of questionnaireFormArray.controls" class="row align-items-center">
+            <div class="col-md-6">
+              <label>{{questionForm.value.question}}</label>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+              <mat-radio-group [formControl]="questionForm.get('answer')">
+                <mat-radio-button
+                  class="mx-2"
+                  *ngFor="let answer of questionForm.value.answers" [value]="answer.Id">
+                  {{answer.Respuesta}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="d-flex justify-content-center">
+        <button mat-raised-button type="submit" [disabled]="!itemFormGroup.valid">
+          Enviar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+</div>

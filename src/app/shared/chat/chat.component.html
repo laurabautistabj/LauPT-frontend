@@ -1,0 +1,51 @@
+<mat-toolbar mat-dialog-title color="primary"
+             class="d-flex justify-content-between align-items-center mat-elevation-z4">
+  <span>{{course.Nombre}}</span>
+  <button mat-button [mat-dialog-close]="false" type="button">SALIR</button>
+</mat-toolbar>
+
+<mat-dialog-content>
+  <div class="container-fluid d-flex flex-column h-100">
+    <div class="data h-100 overflow-auto" #messagesContainerRef style="scroll-behavior: smooth;">
+      <div class="messages" *ngFor="let msj of messages | async">
+        <div class="messages">
+
+          <div class="message-orange" *ngIf="msj.createdBy.id === currentUser.uid">
+            <p class="message-content">{{msj.message}}</p>
+            <div class="message-timestamp-right">
+              <span style="float: right;">{{msj.createdBy.name}} </span> <br>
+              <span>Fecha: {{msj.created | date:'dd-MMM-yyyy, h:mm a'}}</span>
+            </div>
+          </div>
+
+          <div class="message-blue" *ngIf="msj.createdBy.id !== currentUser.uid">
+            <p class="message-content">{{msj.message}}</p>
+            <div class="message-timestamp-left">
+              <span style="float: right;"> {{msj.createdBy.name}} </span> <br>
+              <span>Fecha: {{msj.created | date:'dd-MMM-yyyy, h:mm a'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="save mt-auto mb-3">
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field appearance="fill" class="textAreaData">
+            <mat-label>Escriba su mensaje aquí</mat-label>
+            <textarea matInput [formControl]="newMessageCtrl" #newMessageRef style="resize: none;"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <button mat-raised-button color="primary" class="buttonSave" (click)="sendMessage()"
+                  [disabled]="newMessageCtrl.value === '' ">Enviar mensaje
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

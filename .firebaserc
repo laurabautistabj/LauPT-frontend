@@ -1,0 +1,21 @@
+{
+  "targets": {
+    "lemus-dev": {
+      "hosting": {
+        "app": [
+          "lemus-dev"
+        ]
+      }
+    },
+    "srp-telematica": {
+      "hosting": {
+        "app": [
+          "srp-telematica"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "staging": "srp-telematica"
+  }
+}

@@ -1,0 +1,67 @@
+<h1 mat-dialog-title class="color-blue">{{info.item ? 'Editar Tema: ' + info.item.Nombre : 'Nuevo Tema'}}</h1>
+
+<form [formGroup]="itemGroup" (ngSubmit)="onSubmit()" class="w-100">
+
+  <div mat-dialog-content>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field class="w-100">
+            <mat-label>Nombre del tema</mat-label>
+            <input type="text" formControlName="name" matInput name="name">
+            <mat-error>
+              <app-field-error [fieldCtrl]="itemGroup.get('name')"></app-field-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <mat-form-field class="w-100">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="description" name="description"></textarea>
+            <mat-error>
+              <app-field-error [fieldCtrl]="itemGroup.get('description')"></app-field-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12">
+          <mat-form-field class="w-100">
+            <mat-label>Tema Número</mat-label>
+            <input type="text" formControlName="index" matInput [imask]="indexMask" name="index">
+            <mat-error>
+              <app-field-error [fieldCtrl]="itemGroup.get('index')"></app-field-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Número de preguntas por cuestionario</mat-label>
+            <input type="text" formControlName="questionsPerQuestionnaire" matInput [imask]="questionsMask" name="questionsPerQuestionnaire">
+            <mat-error>
+              <app-field-error [fieldCtrl]="itemGroup.get('questionsPerQuestionnaire')"></app-field-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <mat-form-field class="w-100">
+            <mat-label>Tiempo para volver a intentar (hrs)</mat-label>
+            <input type="text" formControlName="timeToTryAgain" matInput [imask]="timeTryMask" name="timeToTryAgain">
+            <mat-hint *ngIf="itemGroup.get('timeToTryAgain').value && itemGroup.get('timeToTryAgain').value < 1">
+              {{itemGroup.get('timeToTryAgain').value * 60}} minutos
+            </mat-hint>
+            <mat-error>
+              <app-field-error [fieldCtrl]="itemGroup.get('timeToTryAgain')"></app-field-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">Cerrar</button>
+    <button mat-button type="submit" [disabled]="!itemGroup.valid">Guardar</button>
+  </div>
+</form>
